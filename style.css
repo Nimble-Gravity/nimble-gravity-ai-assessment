@@ -37,8 +37,14 @@ table{border-collapse:collapse;width:100%;margin:18px 0;font-size:14.5px}
 th{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-align:left;color:var(--amber);border-bottom:2px solid var(--navy);padding:8px 10px}
 td{border-bottom:1px solid var(--hair);padding:10px;vertical-align:top}
 .pagenav{display:flex;justify-content:space-between;margin:56px 0 0;border-top:1px solid var(--hair);padding-top:18px;font-size:14px}
-.hero{background:var(--navy);border-radius:16px;padding:8px;margin:30px -64px}
+.hero{background:var(--navy);border-radius:16px;padding:8px;margin:30px -64px;position:relative}
+.expand-hint{position:absolute;bottom:14px;right:20px;font-size:12px;color:rgba(255,255,255,0.55);pointer-events:none;letter-spacing:.5px}
+.diagram-trigger{cursor:zoom-in}
+.diagram-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;flex-direction:column;padding:24px}
+.diagram-modal.open{display:flex}
+.diagram-modal img{max-width:100%;max-height:88vh;object-fit:contain;border-radius:10px;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
+.modal-hint{color:rgba(255,255,255,0.45);font-size:13px;margin-top:14px}
 footer{color:var(--muted);font-size:12.5px;margin-top:60px}
-@media(max-width:860px){.layout{grid-template-columns:1fr}nav{position:static;height:auto}main{padding:32px 22px}.hero{margin:20px -22px}}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav{position:static;height:auto}main{padding:32px 22px}.hero{margin:20px -22px}.expand-hint{display:none}}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 @media(prefers-reduced-motion:no-preference){.orbit-dot{animation:pulse 3.5s ease-in-out infinite}@keyframes pulse{50%{opacity:.55}}}
