@@ -1,91 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1060" width="1400" height="1060" role="img" aria-label="AI-SDLC maturity model, six levels in two rows with defining characteristics">
-<rect width="1400" height="1060" fill="#F8F2E7" rx="14"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" width="1400" height="700" role="img" aria-label="AI-SDLC maturity model, six levels in two rows with defining characteristics">
+<rect width="1400" height="700" fill="#F8F2E7" rx="14"/>
 <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C97E12"/></marker></defs>
-<text x="40" y="48" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#2E1A47">Nimble Gravity AI-SDLC Maturity Model</text>
-<text x="40" y="68" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#6E6280">Six levels, one concrete gate per transition</text>
+<text x="40" y="46" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#2E1A47">Nimble Gravity AI-SDLC Maturity Model</text>
+<text x="40" y="68" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#6E6280">Six levels, one concrete gate per transition</text>
 
-<!-- ═══ LEVEL 0 (x=20, y=90, 360×430) ═══ -->
-<rect x="20" y="90" width="360" height="430" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
-<text x="40" y="124" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 0</text>
-<text x="40" y="152" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#2E1A47">No AI Use</text>
-<line x1="40" y1="166" x2="362" y2="166" stroke="#C97E12" stroke-width="1.2"/>
-<circle cx="53" cy="188" r="3" fill="#C97E12"/><text x="65" y="193" font-family="Arial,sans-serif" font-size="15" fill="#443659">No sanctioned AI tooling</text>
-<circle cx="53" cy="213" r="3" fill="#C97E12"/><text x="65" y="218" font-family="Arial,sans-serif" font-size="15" fill="#443659">No acceptable-use policy or data rules</text>
-<circle cx="53" cy="238" r="3" fill="#C97E12"/><text x="65" y="243" font-family="Arial,sans-serif" font-size="15" fill="#443659">Shadow AI risk invisible</text>
-<circle cx="53" cy="263" r="3" fill="#C97E12"/><text x="65" y="268" font-family="Arial,sans-serif" font-size="15" fill="#443659">No baseline for later comparison</text>
+<!-- LEVEL 0 (x=20, y=90, 360x270) -->
+<rect x="20" y="90" width="360" height="270" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
+<text x="42" y="126" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 0</text>
+<text x="42" y="158" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#2E1A47">No AI Use</text>
+<line x1="42" y1="172" x2="360" y2="172" stroke="#C97E12" stroke-width="1.2"/>
+<circle cx="50" cy="203" r="3.5" fill="#C97E12"/><text x="62" y="209" font-family="Arial,sans-serif" font-size="18" fill="#443659">No sanctioned AI tooling</text>
+<circle cx="50" cy="233" r="3.5" fill="#C97E12"/><text x="62" y="239" font-family="Arial,sans-serif" font-size="18" fill="#443659">No acceptable-use/data policy</text>
+<circle cx="50" cy="263" r="3.5" fill="#C97E12"/><text x="62" y="269" font-family="Arial,sans-serif" font-size="18" fill="#443659">Shadow AI risk invisible</text>
+<circle cx="50" cy="293" r="3.5" fill="#C97E12"/><text x="62" y="299" font-family="Arial,sans-serif" font-size="18" fill="#443659">No baseline for comparison</text>
 
-<!-- ═══ GATE 0→1 ═══ -->
-<text x="410" y="290" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#C97E12">0→1</text>
-<line x1="383" y1="302" x2="437" y2="302" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- GATE 0->1 -->
+<text x="410" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="1.5" fill="#C97E12">0&#8594;1</text>
+<line x1="384" y1="225" x2="436" y2="225" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
 
-<!-- ═══ LEVEL 1 (x=440, y=90, 360×430) ═══ -->
-<rect x="440" y="90" width="360" height="430" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
-<text x="460" y="124" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 1</text>
-<text x="460" y="152" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#2E1A47">Ad Hoc</text>
-<line x1="460" y1="166" x2="782" y2="166" stroke="#C97E12" stroke-width="1.2"/>
-<circle cx="473" cy="188" r="3" fill="#C97E12"/><text x="485" y="193" font-family="Arial,sans-serif" font-size="15" fill="#443659">Individual, improvised use</text>
-<circle cx="473" cy="213" r="3" fill="#C97E12"/><text x="485" y="218" font-family="Arial,sans-serif" font-size="15" fill="#443659">Champions self-identify</text>
-<circle cx="473" cy="238" r="3" fill="#C97E12"/><text x="485" y="243" font-family="Arial,sans-serif" font-size="15" fill="#443659">AUP and approved-tool list exist</text>
-<circle cx="473" cy="263" r="3" fill="#C97E12"/><text x="485" y="268" font-family="Arial,sans-serif" font-size="15" fill="#443659">Seat counts are only metric</text>
-<circle cx="473" cy="288" r="3" fill="#C97E12"/><text x="485" y="293" font-family="Arial,sans-serif" font-size="15" fill="#443659">Value leaves with the person</text>
+<!-- LEVEL 1 (x=440, y=90, 360x270) -->
+<rect x="440" y="90" width="360" height="270" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
+<text x="462" y="126" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 1</text>
+<text x="462" y="158" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#2E1A47">Ad Hoc</text>
+<line x1="462" y1="172" x2="780" y2="172" stroke="#C97E12" stroke-width="1.2"/>
+<circle cx="470" cy="203" r="3.5" fill="#C97E12"/><text x="482" y="209" font-family="Arial,sans-serif" font-size="18" fill="#443659">Individual, improvised use</text>
+<circle cx="470" cy="233" r="3.5" fill="#C97E12"/><text x="482" y="239" font-family="Arial,sans-serif" font-size="18" fill="#443659">Champions self-identify</text>
+<circle cx="470" cy="263" r="3.5" fill="#C97E12"/><text x="482" y="269" font-family="Arial,sans-serif" font-size="18" fill="#443659">AUP + approved-tool list exist</text>
+<circle cx="470" cy="293" r="3.5" fill="#C97E12"/><text x="482" y="299" font-family="Arial,sans-serif" font-size="18" fill="#443659">Seat counts are only metric</text>
+<circle cx="470" cy="323" r="3.5" fill="#C97E12"/><text x="482" y="329" font-family="Arial,sans-serif" font-size="18" fill="#443659">Value leaves with the person</text>
 
-<!-- ═══ GATE 1→2 ═══ -->
-<text x="830" y="290" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#C97E12">1→2</text>
-<line x1="803" y1="302" x2="857" y2="302" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- GATE 1->2 -->
+<text x="830" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="1.5" fill="#C97E12">1&#8594;2</text>
+<line x1="804" y1="225" x2="856" y2="225" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
 
-<!-- ═══ LEVEL 2 (x=860, y=90, 360×430) ═══ -->
-<rect x="860" y="90" width="360" height="430" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
-<text x="880" y="124" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 2</text>
-<text x="880" y="152" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#2E1A47">Defined</text>
-<line x1="880" y1="166" x2="1202" y2="166" stroke="#C97E12" stroke-width="1.2"/>
-<circle cx="893" cy="188" r="3" fill="#C97E12"/><text x="905" y="193" font-family="Arial,sans-serif" font-size="15" fill="#443659">Named, documented workflows</text>
-<circle cx="893" cy="213" r="3" fill="#C97E12"/><text x="905" y="218" font-family="Arial,sans-serif" font-size="15" fill="#443659">Config versioned in every repo</text>
-<circle cx="893" cy="238" r="3" fill="#C97E12"/><text x="905" y="243" font-family="Arial,sans-serif" font-size="15" fill="#443659">Golden-path templates</text>
-<circle cx="893" cy="263" r="3" fill="#C97E12"/><text x="905" y="268" font-family="Arial,sans-serif" font-size="15" fill="#443659">Provenance labeled in PRs</text>
-<circle cx="893" cy="288" r="3" fill="#C97E12"/><text x="905" y="293" font-family="Arial,sans-serif" font-size="15" fill="#443659">Adoption tracked per workflow</text>
+<!-- LEVEL 2 (x=860, y=90, 360x270) -->
+<rect x="860" y="90" width="360" height="270" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
+<text x="882" y="126" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 2</text>
+<text x="882" y="158" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#2E1A47">Defined</text>
+<line x1="882" y1="172" x2="1200" y2="172" stroke="#C97E12" stroke-width="1.2"/>
+<circle cx="890" cy="203" r="3.5" fill="#C97E12"/><text x="902" y="209" font-family="Arial,sans-serif" font-size="18" fill="#443659">Named, documented workflows</text>
+<circle cx="890" cy="233" r="3.5" fill="#C97E12"/><text x="902" y="239" font-family="Arial,sans-serif" font-size="18" fill="#443659">Config versioned in every repo</text>
+<circle cx="890" cy="263" r="3.5" fill="#C97E12"/><text x="902" y="269" font-family="Arial,sans-serif" font-size="18" fill="#443659">Golden-path templates</text>
+<circle cx="890" cy="293" r="3.5" fill="#C97E12"/><text x="902" y="299" font-family="Arial,sans-serif" font-size="18" fill="#443659">Provenance labeled in PRs</text>
+<circle cx="890" cy="323" r="3.5" fill="#C97E12"/><text x="902" y="329" font-family="Arial,sans-serif" font-size="18" fill="#443659">Adoption tracked per workflow</text>
 
-<!-- ═══ GATE 2→3 CROSS-ROW ELBOW ═══ -->
-<path d="M 1040 520 L 1040 551 L 380 551 L 380 582" fill="none" stroke="#C97E12" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr)"/>
-<text x="710" y="544" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#C97E12">2→3</text>
+<!-- GATE 2->3 CROSS-ROW ELBOW -->
+<path d="M 1040 360 L 1040 385 L 380 385 L 380 410" fill="none" stroke="#C97E12" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+<text x="710" y="379" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="1.5" fill="#C97E12">2&#8594;3</text>
 
-<!-- ═══ LEVEL 3 (x=200, y=582, 360×430) ═══ -->
-<rect x="200" y="582" width="360" height="430" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
-<text x="220" y="616" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 3</text>
-<text x="220" y="644" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#2E1A47">Managed Autonomy</text>
-<line x1="220" y1="658" x2="542" y2="658" stroke="#C97E12" stroke-width="1.2"/>
-<circle cx="233" cy="678" r="3" fill="#C97E12"/><text x="245" y="683" font-family="Arial,sans-serif" font-size="15" fill="#443659">Agents execute inside boundaries</text>
-<circle cx="233" cy="703" r="3" fill="#C97E12"/><text x="245" y="708" font-family="Arial,sans-serif" font-size="15" fill="#443659">Checkpoints replace line review</text>
-<circle cx="233" cy="728" r="3" fill="#C97E12"/><text x="245" y="733" font-family="Arial,sans-serif" font-size="15" fill="#443659">Verification harness gates merges</text>
-<circle cx="233" cy="753" r="3" fill="#C97E12"/><text x="245" y="758" font-family="Arial,sans-serif" font-size="15" fill="#443659">Machine-readable definition of done</text>
-<circle cx="233" cy="778" r="3" fill="#C97E12"/><text x="245" y="783" font-family="Arial,sans-serif" font-size="15" fill="#443659">Audit trail and tested rollback</text>
+<!-- LEVEL 3 (x=200, y=410, 360x270) -->
+<rect x="200" y="410" width="360" height="270" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
+<text x="222" y="446" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 3</text>
+<text x="222" y="478" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#2E1A47">Managed Autonomy</text>
+<line x1="222" y1="492" x2="540" y2="492" stroke="#C97E12" stroke-width="1.2"/>
+<circle cx="230" cy="523" r="3.5" fill="#C97E12"/><text x="242" y="529" font-family="Arial,sans-serif" font-size="18" fill="#443659">Agents run inside boundaries</text>
+<circle cx="230" cy="553" r="3.5" fill="#C97E12"/><text x="242" y="559" font-family="Arial,sans-serif" font-size="18" fill="#443659">Checkpoints replace line review</text>
+<circle cx="230" cy="583" r="3.5" fill="#C97E12"/><text x="242" y="589" font-family="Arial,sans-serif" font-size="18" fill="#443659">Test harness gates every merge</text>
+<circle cx="230" cy="613" r="3.5" fill="#C97E12"/><text x="242" y="619" font-family="Arial,sans-serif" font-size="18" fill="#443659">Machine-readable done criteria</text>
+<circle cx="230" cy="643" r="3.5" fill="#C97E12"/><text x="242" y="649" font-family="Arial,sans-serif" font-size="18" fill="#443659">Audit trail and tested rollback</text>
 
-<!-- ═══ GATE 3→4 ═══ -->
-<text x="590" y="780" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#C97E12">3→4</text>
-<line x1="563" y1="792" x2="617" y2="792" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- GATE 3->4 -->
+<text x="590" y="530" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="1.5" fill="#C97E12">3&#8594;4</text>
+<line x1="564" y1="545" x2="616" y2="545" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
 
-<!-- ═══ LEVEL 4 (x=620, y=582, 360×430) ═══ -->
-<rect x="620" y="582" width="360" height="430" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
-<text x="640" y="616" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 4</text>
-<text x="640" y="644" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#2E1A47">Quantitatively Managed</text>
-<line x1="640" y1="658" x2="962" y2="658" stroke="#C97E12" stroke-width="1.2"/>
-<circle cx="653" cy="678" r="3" fill="#C97E12"/><text x="665" y="683" font-family="Arial,sans-serif" font-size="15" fill="#443659">Telemetry on by default</text>
-<circle cx="653" cy="703" r="3" fill="#C97E12"/><text x="665" y="708" font-family="Arial,sans-serif" font-size="15" fill="#443659">Baseline before any rollout</text>
-<circle cx="653" cy="728" r="3" fill="#C97E12"/><text x="665" y="733" font-family="Arial,sans-serif" font-size="15" fill="#443659">Net ROI per named workflow</text>
-<circle cx="653" cy="753" r="3" fill="#C97E12"/><text x="665" y="758" font-family="Arial,sans-serif" font-size="15" fill="#443659">Promote or retire on thresholds</text>
-<circle cx="653" cy="778" r="3" fill="#C97E12"/><text x="665" y="783" font-family="Arial,sans-serif" font-size="15" fill="#443659">Spend limits, pinned model versions</text>
+<!-- LEVEL 4 (x=620, y=410, 360x270) -->
+<rect x="620" y="410" width="360" height="270" rx="10" fill="#EFEAF9" stroke="#2E1A47" stroke-width="1.5"/>
+<text x="642" y="446" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 4</text>
+<text x="642" y="478" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#2E1A47">Quantitatively Managed</text>
+<line x1="642" y1="492" x2="960" y2="492" stroke="#C97E12" stroke-width="1.2"/>
+<circle cx="650" cy="523" r="3.5" fill="#C97E12"/><text x="662" y="529" font-family="Arial,sans-serif" font-size="18" fill="#443659">Telemetry on by default</text>
+<circle cx="650" cy="553" r="3.5" fill="#C97E12"/><text x="662" y="559" font-family="Arial,sans-serif" font-size="18" fill="#443659">Baseline before any rollout</text>
+<circle cx="650" cy="583" r="3.5" fill="#C97E12"/><text x="662" y="589" font-family="Arial,sans-serif" font-size="18" fill="#443659">Net ROI per named workflow</text>
+<circle cx="650" cy="613" r="3.5" fill="#C97E12"/><text x="662" y="619" font-family="Arial,sans-serif" font-size="18" fill="#443659">Promote or retire on thresholds</text>
+<circle cx="650" cy="643" r="3.5" fill="#C97E12"/><text x="662" y="649" font-family="Arial,sans-serif" font-size="18" fill="#443659">Spend caps and pinned models</text>
 
-<!-- ═══ GATE 4→5 ═══ -->
-<text x="1010" y="780" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#C97E12">4→5</text>
-<line x1="983" y1="792" x2="1037" y2="792" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- GATE 4->5 -->
+<text x="1010" y="530" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="1.5" fill="#C97E12">4&#8594;5</text>
+<line x1="984" y1="545" x2="1036" y2="545" stroke="#C97E12" stroke-width="1.5" marker-end="url(#arr)"/>
 
-<!-- ═══ LEVEL 5 DARK (x=1040, y=582, 360×430) ═══ -->
-<rect x="1040" y="582" width="360" height="430" rx="10" fill="#2E1A47"/>
-<text x="1060" y="616" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 5</text>
-<text x="1060" y="644" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#FFFFFF">Optimizing</text>
-<line x1="1060" y1="658" x2="1382" y2="658" stroke="#C97E12" stroke-width="1.2"/>
-<circle cx="1073" cy="678" r="3" fill="#C97E12"/><text x="1085" y="683" font-family="Arial,sans-serif" font-size="15" fill="#E4DACB">Specs are the source of truth</text>
-<circle cx="1073" cy="703" r="3" fill="#C97E12"/><text x="1085" y="708" font-family="Arial,sans-serif" font-size="15" fill="#E4DACB">Backlog agent-ready by default</text>
-<circle cx="1073" cy="728" r="3" fill="#C97E12"/><text x="1085" y="733" font-family="Arial,sans-serif" font-size="15" fill="#E4DACB">Review is exception-driven</text>
-<circle cx="1073" cy="753" r="3" fill="#C97E12"/><text x="1085" y="758" font-family="Arial,sans-serif" font-size="15" fill="#E4DACB">Policy enforced as code</text>
-<circle cx="1073" cy="778" r="3" fill="#C97E12"/><text x="1085" y="783" font-family="Arial,sans-serif" font-size="15" fill="#E4DACB">Outcome-based economics</text>
+<!-- LEVEL 5 DARK (x=1040, y=410, 360x270) -->
+<rect x="1040" y="410" width="360" height="270" rx="10" fill="#2E1A47"/>
+<text x="1062" y="446" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#C97E12">LEVEL 5</text>
+<text x="1062" y="478" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">Optimizing</text>
+<line x1="1062" y1="492" x2="1380" y2="492" stroke="#C97E12" stroke-width="1.2"/>
+<circle cx="1070" cy="523" r="3.5" fill="#C97E12"/><text x="1082" y="529" font-family="Arial,sans-serif" font-size="18" fill="#E4DACB">Specs are the source of truth</text>
+<circle cx="1070" cy="553" r="3.5" fill="#C97E12"/><text x="1082" y="559" font-family="Arial,sans-serif" font-size="18" fill="#E4DACB">Backlog agent-ready by default</text>
+<circle cx="1070" cy="583" r="3.5" fill="#C97E12"/><text x="1082" y="589" font-family="Arial,sans-serif" font-size="18" fill="#E4DACB">Review is exception-driven</text>
+<circle cx="1070" cy="613" r="3.5" fill="#C97E12"/><text x="1082" y="619" font-family="Arial,sans-serif" font-size="18" fill="#E4DACB">Policy enforced as code</text>
+<circle cx="1070" cy="643" r="3.5" fill="#C97E12"/><text x="1082" y="649" font-family="Arial,sans-serif" font-size="18" fill="#E4DACB">Outcome-based economics</text>
 </svg>
