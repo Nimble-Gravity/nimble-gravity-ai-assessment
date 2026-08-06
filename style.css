@@ -12,6 +12,8 @@ nav a{display:block;color:var(--ice);padding:7px 10px;border-radius:8px;font-siz
 nav a:hover{background:var(--navy2)}
 nav a.on{background:var(--navy2);color:#fff;border-left:3px solid var(--amber);padding-left:7px}
 nav .lvl{font-variant-numeric:tabular-nums;color:var(--amber);font-weight:600;margin-right:8px}
+nav .orbit{display:block;margin-left:24px;font-size:11px;font-style:italic;letter-spacing:.3px;color:#8E7BB0}
+nav a.on .orbit{color:#B9A9D6}
 nav .grp{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#8E7BB0;margin:22px 0 6px}
 main{padding:56px 64px;max-width:900px}
 .kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);font-weight:600}
