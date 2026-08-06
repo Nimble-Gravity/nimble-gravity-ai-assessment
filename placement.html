@@ -1,0 +1,291 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Placement instrument · NG AI-SDLC Maturity Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Spreadsheet chrome ─────────────────────────────────────────── */
+.sheet-wrap{--grid:#D9D2E4;--head:#F0ECF7;--headtx:#5A4A72;--sel:#C97E12;
+  border:1px solid var(--grid);border-radius:10px;overflow:hidden;background:#fff;
+  box-shadow:0 2px 14px rgba(46,26,71,.08);margin:22px 0 8px;font-family:Archivo,system-ui,sans-serif}
+.xl-bar{display:flex;align-items:center;gap:10px;background:var(--head);border-bottom:1px solid var(--grid);
+  padding:7px 12px;font-size:12px;color:var(--headtx)}
+.xl-bar .cellref{font-family:ui-monospace,Menlo,monospace;font-weight:700;color:var(--navy);
+  background:#fff;border:1px solid var(--grid);border-radius:5px;padding:3px 10px;min-width:52px;text-align:center}
+.xl-bar .fx{font-style:italic;opacity:.7}
+.xl-scroll{overflow:auto;max-height:none}
+table.xl{border-collapse:collapse;width:100%;font-size:13.5px;table-layout:fixed}
+table.xl col.c-row{width:38px}
+table.xl col.c-num{width:44px}
+table.xl col.c-ans{width:92px}
+table.xl thead th{position:sticky;top:0;z-index:3;background:var(--head);color:var(--headtx);
+  font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:none;
+  border:1px solid var(--grid);padding:5px 8px;text-align:center}
+table.xl th.corner{width:38px;left:0;z-index:5;position:sticky}
+table.xl td{border:1px solid var(--grid);padding:6px 9px;vertical-align:middle;background:#fff}
+table.xl td.rownum{background:var(--head);color:var(--headtx);text-align:center;font-size:11px;
+  font-variant-numeric:tabular-nums;position:sticky;left:0;z-index:2}
+table.xl tr.band td{background:var(--ice);font-weight:700;color:var(--navy);
+  letter-spacing:1.5px;text-transform:uppercase;font-size:11px}
+table.xl td.qnum{text-align:center;color:var(--muted);font-variant-numeric:tabular-nums}
+table.xl td.qtext{color:var(--ink);line-height:1.4}
+table.xl td.gateflag{text-align:center;font-size:11px;color:var(--amber);font-weight:700}
+table.xl td.ans{padding:0;text-align:center}
+.ans select{width:100%;border:0;background:transparent;font:inherit;font-weight:700;
+  text-align:center;text-align-last:center;padding:7px 4px;cursor:pointer;color:var(--muted);
+  appearance:none;-webkit-appearance:none}
+.ans.yes{background:#EAF6EC}.ans.yes select{color:#1F7A34}
+.ans.no{background:#FBECEC}.ans.no select{color:#B23B3B}
+.ans select:focus{outline:2px solid var(--sel);outline-offset:-2px}
+/* ── Sheet tabs ─────────────────────────────────────────────────── */
+.xl-tabs{display:flex;gap:0;background:var(--head);border-top:1px solid var(--grid)}
+.xl-tabs button{border:0;background:transparent;border-right:1px solid var(--grid);
+  padding:9px 20px;font:600 13px Archivo,system-ui;color:var(--headtx);cursor:pointer}
+.xl-tabs button.active{background:#fff;color:var(--navy);box-shadow:inset 0 2px 0 var(--amber)}
+/* ── Placement (results) sheet ──────────────────────────────────── */
+table.xl td.reslabel{font-weight:600;color:var(--navy)}
+table.xl td.resval{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.bar{position:relative;background:#EFEAF9;border-radius:4px;height:16px;overflow:hidden}
+.bar > span{position:absolute;inset:0 auto 0 0;background:var(--amber);border-radius:4px}
+.bar.pass > span{background:#2F9E44}
+.you-here{color:var(--amber);font-weight:700;white-space:nowrap}
+.placed-big{font-family:Fraunces,serif;font-size:20px;font-weight:600;color:var(--navy)}
+.diag{max-width:70ch;line-height:1.5}
+.toolrow{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}
+.btn{border:1px solid var(--hair);background:#fff;border-radius:8px;padding:7px 14px;
+  font:600 13px Archivo;color:var(--navy);cursor:pointer}
+.btn:hover{background:var(--ice)}
+.hint{font-size:13px;color:var(--muted);font-style:italic;margin:10px 0 0}
+</style>
+</head><body><div class="layout"><nav><div class="brand">Nimble Gravity<span>.</span></div><div class="sub">AI-SDLC Maturity Model</div><a href="index.html" class="">Overview &amp; gates</a><div class="grp">Levels</div><a href="level-0.html" class=""><span class="lvl">0</span>No AI Use<span class="orbit">Grounded</span></a><a href="level-1.html" class=""><span class="lvl">1</span>Ad Hoc<span class="orbit">Opportunistic</span></a><a href="level-2.html" class=""><span class="lvl">2</span>Defined<span class="orbit">Repeatable</span></a><a href="level-3.html" class=""><span class="lvl">3</span>Managed Autonomy<span class="orbit">Bounded</span></a><a href="level-4.html" class=""><span class="lvl">4</span>Quantitatively Managed<span class="orbit">Instrumented</span></a><a href="level-5.html" class=""><span class="lvl">5</span>Optimizing<span class="orbit">Transformative</span></a><div class="grp">Field kit</div><a href="assessment.html" class="">Running the assessment</a><a href="placement.html" class="on">Placement instrument</a><a href="metrics.html" class="">Appendix: metrics catalog</a></nav><main>
+<div class="kicker">Field kit · Interactive</div>
+<h1>Placement instrument</h1>
+<p class="lede">Answer every question <strong>Y</strong> or <strong>N</strong> based on what the client can evidence today, not what is planned. If it is true for some teams but not standard, answer N. The <em>Placement</em> tab scores as you go — the same hidden map used in the workbook.</p>
+
+<div class="toolrow">
+  <button class="btn" id="allNo">Reset to N</button>
+  <button class="btn" id="clearAll">Clear all</button>
+  <span class="hint" id="progress"></span>
+</div>
+
+<div class="sheet-wrap">
+  <div class="xl-bar"><span class="cellref" id="cellref">B6</span><span class="fx">ƒ<sub>x</sub></span><span id="fxview">Has the organization issued sanctioned AI licenses…</span></div>
+  <div class="xl-scroll">
+    <!-- QUESTIONNAIRE SHEET -->
+    <table class="xl" id="qsheet">
+      <colgroup><col class="c-row"><col class="c-num"><col><col class="c-ans"></colgroup>
+      <thead><tr><th class="corner"></th><th>A</th><th>B</th><th>C</th></tr>
+        <tr><th class="corner">1</th><th style="text-align:left" colspan="3">Nimble Gravity AI-SDLC Maturity Assessment</th></tr></thead>
+      <tbody id="qbody"></tbody>
+    </table>
+    <!-- PLACEMENT SHEET -->
+    <table class="xl" id="psheet" style="display:none">
+      <colgroup><col class="c-row"><col style="width:280px"><col style="width:130px"><col></colgroup>
+      <thead><tr><th class="corner"></th><th>B</th><th>C</th><th>D / E / F</th></tr></thead>
+      <tbody id="pbody"></tbody>
+    </table>
+  </div>
+  <div class="xl-tabs">
+    <button class="active" data-sheet="q">Questionnaire</button>
+    <button data-sheet="p">Placement</button>
+  </div>
+</div>
+<p class="hint">Placed level = the lower of the <strong>gate ceiling</strong> (highest consecutive gate evidenced) and the <strong>evidence ceiling</strong> (highest consecutive level with at least 60% of its questions answered Y).</p>
+
+<div class="pagenav"><a href="assessment.html">← Running the assessment</a><a href="metrics.html">Appendix: metrics catalog →</a></div>
+<footer>Nimble Gravity AI-SDLC Maturity Model (ORBIT) · Internal and client-facing reference · 2026</footer></main></div>
+
+<script>
+// ── Data extracted from nimble-gravity-ai-sdlc-assessment.xlsx ───────────
+const SECTIONS = [
+  {t:"TOOLS & SETUP", from:1, to:8},
+  {t:"WAYS OF WORKING", from:9, to:20},
+  {t:"QUALITY, REVIEW & SAFETY", from:21, to:31},
+  {t:"DATA, TELEMETRY & MEASUREMENT", from:32, to:41},
+  {t:"SPEND & GOVERNANCE", from:42, to:46},
+  {t:"COMMERCIAL & ORGANIZATION", from:47, to:49},
+];
+const Q = [
+ {n:1,dim:"Governance & Risk",lvl:1,gate:1,t:"Has the organization issued sanctioned AI licenses and published an acceptable-use policy?"},
+ {n:2,dim:"Governance & Risk",lvl:1,gate:0,t:"Is there a list of approved AI tools that procurement actually enforces?"},
+ {n:3,dim:"Governance & Risk",lvl:1,gate:0,t:"Have personal or shadow AI accounts been migrated onto sanctioned tools?"},
+ {n:4,dim:"Platform & Tooling",lvl:2,gate:0,t:"Do repositories contain versioned AI configuration, such as context files or prompts, alongside the code?"},
+ {n:5,dim:"Platform & Tooling",lvl:2,gate:0,t:"Do new projects start from a standard AI-ready scaffold or template?"},
+ {n:6,dim:"Platform & Tooling",lvl:3,gate:0,t:"Do AI tools have governed access to internal documentation, code, and decision history?"},
+ {n:7,dim:"Platform & Tooling",lvl:3,gate:0,t:"Do agents run in sandboxed environments with scoped credentials?"},
+ {n:8,dim:"Platform & Tooling",lvl:5,gate:0,t:"Can any team stand up an agent pipeline on their own, inside governed boundaries?"},
+ {n:9,dim:"People & Skills",lvl:1,gate:0,t:"Do individual engineers use AI assistants as part of their daily work?"},
+ {n:10,dim:"People & Skills",lvl:1,gate:0,t:"Do recognized AI champions exist, even informally?"},
+ {n:11,dim:"Process & Workflow",lvl:2,gate:0,t:"Are AI workflows documented with an owner, a trigger, and an expected output?"},
+ {n:12,dim:"Process & Workflow",lvl:2,gate:1,t:"Is there at least one AI workflow whose configuration lives in version control and has been reproduced end to end by a second person?"},
+ {n:13,dim:"People & Skills",lvl:2,gate:0,t:"Is there a regular forum where teams share AI workflows, including the failures?"},
+ {n:14,dim:"People & Skills",lvl:2,gate:0,t:"Does onboarding for new engineers include the team’s AI workflows?"},
+ {n:15,dim:"Process & Workflow",lvl:3,gate:0,t:"Do agent-eligible tickets carry a machine-readable definition of done?"},
+ {n:16,dim:"Process & Workflow",lvl:3,gate:0,t:"Do ticket states distinguish work queued for, or in progress with, an agent?"},
+ {n:17,dim:"Process & Workflow",lvl:3,gate:1,t:"Has at least one ticket been completed by an agent end to end, with humans approving only at defined checkpoints?"},
+ {n:18,dim:"Process & Workflow",lvl:5,gate:0,t:"Are specs first-class artifacts that agents work from directly?"},
+ {n:19,dim:"Process & Workflow",lvl:5,gate:0,t:"Is the backlog agent-ready by default, with human-only work as the exception?"},
+ {n:20,dim:"People & Skills",lvl:5,gate:0,t:"Do dedicated roles exist for spec engineering or agent operations?"},
+ {n:21,dim:"Governance & Risk",lvl:2,gate:0,t:"Are there written review standards specifically for AI-assisted changes?"},
+ {n:22,dim:"Governance & Risk",lvl:2,gate:0,t:"Is AI-generated content labeled with provenance in commits or pull requests?"},
+ {n:23,dim:"Process & Workflow",lvl:2,gate:0,t:"Are norms for change size written down, so AI-generated work lands in small batches?"},
+ {n:24,dim:"Platform & Tooling",lvl:3,gate:0,t:"Does an automated verification harness, tests, static analysis, and policy checks, gate every merge?"},
+ {n:25,dim:"Governance & Risk",lvl:3,gate:0,t:"Are boundaries documented for what agents may read, write, and never touch?"},
+ {n:26,dim:"Governance & Risk",lvl:3,gate:0,t:"Have rollback procedures been exercised in practice, not just written?"},
+ {n:27,dim:"People & Skills",lvl:3,gate:0,t:"Are engineers trained to review checkpoint evidence rather than reading every generated line?"},
+ {n:28,dim:"Measurement",lvl:4,gate:0,t:"Do eval suites run before any prompt or model change ships?"},
+ {n:29,dim:"Governance & Risk",lvl:4,gate:0,t:"Are model versions pinned, with upgrades passing evaluation before rollout?"},
+ {n:30,dim:"Process & Workflow",lvl:5,gate:0,t:"Is review effort triggered by signals rather than scheduled for everything?"},
+ {n:31,dim:"Platform & Tooling",lvl:5,gate:0,t:"Do drift alerts trigger automated rollback or rerouting when quality regresses?"},
+ {n:32,dim:"Measurement",lvl:2,gate:0,t:"Can you say which teams get value from AI, beyond seat counts and logins?"},
+ {n:33,dim:"Measurement",lvl:2,gate:0,t:"Is adoption tracked per workflow rather than per seat?"},
+ {n:34,dim:"People & Skills",lvl:3,gate:0,t:"Does every agent action leave an auditable trail?"},
+ {n:35,dim:"Measurement",lvl:3,gate:0,t:"Are checkpoint pass rates and human intervention rates tracked?"},
+ {n:36,dim:"Platform & Tooling",lvl:4,gate:0,t:"Is telemetry emitted by default on every project, without per-team setup?"},
+ {n:37,dim:"Platform & Tooling",lvl:4,gate:0,t:"Do traces follow a standard schema, such as the OpenTelemetry GenAI conventions, portable across backends?"},
+ {n:38,dim:"Measurement",lvl:4,gate:0,t:"Is a baseline captured before any AI workflow rolls out?"},
+ {n:39,dim:"Measurement",lvl:4,gate:1,t:"Is telemetry on by default with baselines, and has at least one AI workflow been retired because the numbers said so?"},
+ {n:40,dim:"Measurement",lvl:4,gate:0,t:"Are delivery metrics, such as the DORA keys including rework rate, correlated with AI usage?"},
+ {n:41,dim:"Measurement",lvl:4,gate:0,t:"Is net ROI computed per workflow, with costs included?"},
+ {n:42,dim:"Governance & Risk",lvl:1,gate:0,t:"Are data-handling rules published for what may and may not enter a model?"},
+ {n:43,dim:"Measurement",lvl:4,gate:0,t:"Is AI spend attributed per user, task, or workflow, tagged at request time rather than reconstructed later?"},
+ {n:44,dim:"Governance & Risk",lvl:4,gate:0,t:"Are spend limits enforced programmatically, not just budgeted?"},
+ {n:45,dim:"Governance & Risk",lvl:4,gate:0,t:"Are raw-usage numbers, tokens generated or prompts sent, explicitly banned from goals and dashboards?"},
+ {n:46,dim:"Governance & Risk",lvl:5,gate:0,t:"Is policy enforced as code inside the delivery pipeline itself?"},
+ {n:47,dim:"Process & Workflow",lvl:4,gate:0,t:"Are AI workflows promoted or retired against defined thresholds at a regular portfolio review?"},
+ {n:48,dim:"Process & Workflow",lvl:5,gate:1,t:"Has the SDLC been redesigned around agents, with AI-native terms appearing in pricing or contracts?"},
+ {n:49,dim:"Measurement",lvl:5,gate:0,t:"Are outcome-based economics visible in how work is priced or sold?"},
+];
+const LEVEL_NAMES = ["No AI Use","Ad Hoc","Defined","Managed Autonomy","Quantitatively Managed","Optimizing"];
+const DIMS = ["People & Skills","Process & Workflow","Platform & Tooling","Governance & Risk","Measurement"];
+const answers = {}; // n -> "Y" | "N" | ""
+
+// ── Build the questionnaire sheet ────────────────────────────────────────
+const qbody = document.getElementById('qbody');
+let xlRow = 1; // spreadsheet row counter (row 1 = title)
+function ssRow(){ return ++xlRow; }
+SECTIONS.forEach(sec=>{
+  const brow = document.createElement('tr'); brow.className='band';
+  brow.innerHTML = `<td class="rownum">${ssRow()}</td><td colspan="3">${sec.t}</td>`;
+  qbody.appendChild(brow);
+  for(let n=sec.from;n<=sec.to;n++){
+    const q = Q[n-1];
+    const r = ssRow();
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td class="rownum">${r}</td>`+
+      `<td class="qnum">${n}${q.gate?' <span class="gateflag" title="Gate question">⛳</span>':''}</td>`+
+      `<td class="qtext">${q.t}</td>`+
+      `<td class="ans" data-n="${n}"><select aria-label="Answer to question ${n}">`+
+        `<option value="">—</option><option value="Y">Y</option><option value="N">N</option>`+
+      `</select></td>`;
+    qbody.appendChild(tr);
+    const cell = tr.querySelector('.ans');
+    const sel = tr.querySelector('select');
+    sel.addEventListener('change', ()=>{
+      answers[n] = sel.value;
+      cell.classList.toggle('yes', sel.value==='Y');
+      cell.classList.toggle('no', sel.value==='N');
+      recompute();
+    });
+    sel.addEventListener('focus', ()=>{
+      document.getElementById('cellref').textContent = 'C'+r;
+      document.getElementById('fxview').textContent = q.t;
+    });
+    answers[n]="";
+  }
+});
+
+// ── Scoring (mirrors the Placement sheet formulas) ───────────────────────
+function isYes(n){ return answers[n]==='Y'; }
+function levelPct(L){
+  const qs = Q.filter(q=>q.lvl===L);
+  const yes = qs.filter(q=>isYes(q.n)).length;
+  return qs.length ? yes/qs.length : 0;
+}
+function gateCeiling(){
+  let c=0;
+  for(let L=1;L<=5;L++){
+    const g = Q.find(q=>q.lvl===L && q.gate===1);
+    if(g && isYes(g.n)) c=L; else break;
+  }
+  return c;
+}
+function evidenceCeiling(){
+  let c=0;
+  for(let L=1;L<=5;L++){ if(levelPct(L)>=0.6) c=L; else break; }
+  return c;
+}
+function dimAvg(dim){
+  const yes = Q.filter(q=>q.dim===dim && isYes(q.n));
+  if(!yes.length) return 0;
+  return yes.reduce((s,q)=>s+q.lvl,0)/yes.length;
+}
+function yesAbove(placed){ return Q.filter(q=>q.lvl>placed && isYes(q.n)).length; }
+function diagnosis(placed,gc,ec){
+  if(placed===5) return "Diagnosis: operating at the top of the model. The work is holding it.";
+  const above = yesAbove(placed);
+  if(gc<ec) return `Diagnosis: practices outrun the gates. Evidence of higher-level behavior exists (${above} yes answers above the placed level), but gate ${gc+1} has not happened. Close that gate.`;
+  if(above>=4) return `Diagnosis: pockets of higher-level practice exist (${above} yes answers above the placed level). Spread and standardize before reaching further.`;
+  return "Diagnosis: balanced profile. The path forward is the exit gate of the current level.";
+}
+
+// ── Build / update the placement sheet ───────────────────────────────────
+const pbody = document.getElementById('pbody');
+function pct(x){ return Math.round(x*100)+'%'; }
+function bar(x,pass){ return `<div class="bar${pass?' pass':''}"><span style="width:${Math.min(100,x*100)}%"></span></div>`; }
+function recompute(){
+  const gc = gateCeiling(), ec = evidenceCeiling(), placed = Math.min(gc,ec);
+  // progress
+  const answered = Q.filter(q=>answers[q.n]!=="").length;
+  document.getElementById('progress').textContent = `${answered} / ${Q.length} answered`;
+  // placement sheet
+  let rows = [];
+  let rn = 1;
+  rows.push(`<tr class="band"><td class="rownum">${rn++}</td><td colspan="3">Placement</td></tr>`);
+  rows.push(`<tr><td class="rownum">${rn++}</td><td class="reslabel">Level evidence</td><td class="reslabel" style="text-align:center">Evidence %</td><td class="reslabel">Dimension profile (avg level of Y answers)</td></tr>`);
+  for(let L=1;L<=5;L++){
+    const p = levelPct(L), pass = p>=0.6;
+    const dim = DIMS[L-1], da = dimAvg(dim);
+    rows.push(`<tr><td class="rownum">${rn++}</td>`+
+      `<td class="reslabel">Level ${L}: ${LEVEL_NAMES[L]}</td>`+
+      `<td>${bar(p,pass)}<div style="text-align:right;font-size:11px;color:${pass?'#2F9E44':'var(--muted)'};font-weight:700">${pct(p)}</div></td>`+
+      `<td><strong>${dim}</strong> — <span style="font-variant-numeric:tabular-nums">${da?da.toFixed(2):'—'}</span></td></tr>`);
+  }
+  rows.push(`<tr><td class="rownum">${rn++}</td><td colspan="3"></td></tr>`);
+  rows.push(`<tr><td class="rownum">${rn++}</td><td class="reslabel">Gate ceiling</td><td class="resval">${gc}</td><td class="reslabel">The ladder</td></tr>`);
+  // ladder rows next to the summary
+  const ladder = [];
+  for(let L=5;L>=0;L--) ladder.push([L, LEVEL_NAMES[L], L===placed]);
+  rows.push(`<tr><td class="rownum">${rn++}</td><td class="reslabel">Evidence ceiling (60% rule)</td><td class="resval">${ec}</td>`+
+    `<td>${ladder.map(([L,nm,here])=>`<div>Level ${L}: ${nm} ${here?'<span class="you-here">◀ YOU ARE HERE</span>':''}</div>`).join('')}</td></tr>`);
+  rows.push(`<tr><td class="rownum">${rn++}</td><td class="reslabel">PLACED LEVEL</td>`+
+    `<td class="resval placed-big">${placed}</td>`+
+    `<td class="placed-big">${LEVEL_NAMES[placed]}</td></tr>`);
+  rows.push(`<tr><td class="rownum">${rn++}</td><td colspan="3" class="diag">${diagnosis(placed,gc,ec)}</td></tr>`);
+  pbody.innerHTML = rows.join('');
+}
+
+// ── Sheet tab switching ──────────────────────────────────────────────────
+document.querySelectorAll('.xl-tabs button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.xl-tabs button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const p = b.dataset.sheet==='p';
+    document.getElementById('qsheet').style.display = p?'none':'';
+    document.getElementById('psheet').style.display = p?'':'none';
+    document.getElementById('cellref').textContent = p?'B2':'C6';
+    document.getElementById('fxview').textContent = p?'Placement':Q[0].t;
+  });
+});
+
+// ── Toolbar ──────────────────────────────────────────────────────────────
+document.getElementById('allNo').addEventListener('click', ()=>setAll('N'));
+document.getElementById('clearAll').addEventListener('click', ()=>setAll(''));
+function setAll(v){
+  document.querySelectorAll('#qbody select').forEach(sel=>{ sel.value=v; sel.dispatchEvent(new Event('change')); });
+}
+
+recompute();
+</script>
+</body></html>

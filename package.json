@@ -15,8 +15,11 @@
   "type": "commonjs",
   "main": "index.html",
   "scripts": {
-    "dev": "npx serve . --listen 3000 --no-clipboard",
-    "start": "npx serve . --listen 3000 --no-clipboard",
+    "dev": "serve . --listen 3000 --no-clipboard",
+    "start": "serve . --listen 3000 --no-clipboard",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
   }
 }
