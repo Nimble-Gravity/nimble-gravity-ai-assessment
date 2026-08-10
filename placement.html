@@ -55,6 +55,10 @@ table.xl td.resval{text-align:right;font-variant-numeric:tabular-nums;font-weigh
 .btn{border:1px solid var(--hair);background:#fff;border-radius:8px;padding:7px 14px;
   font:600 13px Archivo;color:var(--navy);cursor:pointer}
 .btn:hover{background:var(--ice)}
+.client-in{border:1px solid var(--hair);border-radius:8px;padding:7px 11px;font:600 13px Archivo;
+  color:var(--navy);min-width:220px}
+.client-in::placeholder{color:var(--muted);font-weight:400;font-style:italic}
+.toolrow .spacer{flex:1 1 auto}
 .hint{font-size:13px;color:var(--muted);font-style:italic;margin:10px 0 0}
 </style>
 </head><body><div class="layout"><nav><div class="brand">Nimble Gravity<span>.</span></div><div class="sub">AI-SDLC Maturity Model</div><a href="index.html" class="">Overview &amp; gates</a><div class="grp">Levels</div><a href="level-0.html" class=""><span class="lvl">0</span>No AI Use<span class="orbit">Grounded</span></a><a href="level-1.html" class=""><span class="lvl">1</span>Ad Hoc<span class="orbit">Opportunistic</span></a><a href="level-2.html" class=""><span class="lvl">2</span>Defined<span class="orbit">Repeatable</span></a><a href="level-3.html" class=""><span class="lvl">3</span>Managed Autonomy<span class="orbit">Bounded</span></a><a href="level-4.html" class=""><span class="lvl">4</span>Quantitatively Managed<span class="orbit">Instrumented</span></a><a href="level-5.html" class=""><span class="lvl">5</span>Optimizing<span class="orbit">Transformative</span></a><div class="grp">Field kit</div><a href="assessment.html" class="">Running the assessment</a><a href="placement.html" class="on">Placement instrument</a><a href="metrics.html" class="">Appendix: metrics catalog</a></nav><main>
@@ -63,8 +67,13 @@ table.xl td.resval{text-align:right;font-variant-numeric:tabular-nums;font-weigh
 <p class="lede">Answer every question <strong>Y</strong> or <strong>N</strong> based on what the client can evidence today, not what is planned. If it is true for some teams but not standard, answer N. The <em>Placement</em> tab scores as you go — the same hidden map used in the workbook.</p>
 
 <div class="toolrow">
+  <input class="client-in" id="client" type="text" placeholder="Client / engagement (optional)" autocomplete="off">
   <button class="btn" id="allNo">Reset to N</button>
   <button class="btn" id="clearAll">Clear all</button>
+  <button class="btn" id="exportCsv">Export CSV</button>
+  <button class="btn" id="importCsv">Import CSV</button>
+  <input type="file" id="importFile" accept=".csv,text/csv" hidden>
+  <span class="spacer"></span>
   <span class="hint" id="progress"></span>
 </div>
 
@@ -264,6 +273,7 @@ function recompute(){
     `<td class="placed-big">${LEVEL_NAMES[placed]}</td></tr>`);
   rows.push(`<tr><td class="rownum">${rn++}</td><td colspan="3" class="diag">${diagnosis(placed,gc,ec)}</td></tr>`);
   pbody.innerHTML = rows.join('');
+  saveState();
 }
 
 // ── Sheet tab switching ──────────────────────────────────────────────────
@@ -281,11 +291,140 @@ document.querySelectorAll('.xl-tabs button').forEach(b=>{
 
 // ── Toolbar ──────────────────────────────────────────────────────────────
 document.getElementById('allNo').addEventListener('click', ()=>setAll('N'));
-document.getElementById('clearAll').addEventListener('click', ()=>setAll(''));
+document.getElementById('clearAll').addEventListener('click', clearAllState);
+document.getElementById('exportCsv').addEventListener('click', exportCSV);
+document.getElementById('importCsv').addEventListener('click', ()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const rd = new FileReader();
+  rd.onload = ()=>{ importCSV(String(rd.result)); };
+  rd.readAsText(f);
+  e.target.value = '';
+});
+document.getElementById('client').addEventListener('input', saveState);
+
 function setAll(v){
   document.querySelectorAll('#qbody select').forEach(sel=>{ sel.value=v; sel.dispatchEvent(new Event('change')); });
 }
+function clearAllState(){
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  document.getElementById('client').value = '';
+  setAll('');
+}
 
+// ── Persistence (localStorage autosave/restore) ──────────────────────────
+const LS_KEY = 'ng-aisdlc-placement';
+function saveState(){
+  try{
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      client: document.getElementById('client').value,
+      date: todayISO(),
+      answers
+    }));
+  }catch(e){}
+}
+function loadState(){
+  let data = null;
+  try{ data = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); }catch(e){}
+  if(!data) return;
+  if(typeof data.client === 'string') document.getElementById('client').value = data.client;
+  if(data.answers){
+    document.querySelectorAll('#qbody select').forEach(sel=>{
+      const n = +sel.closest('.ans').dataset.n;
+      const v = data.answers[n];
+      sel.value = (v==='Y'||v==='N') ? v : '';
+      sel.dispatchEvent(new Event('change'));
+    });
+  }
+}
+
+// ── CSV helpers ──────────────────────────────────────────────────────────
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function sectionOf(n){ const s = SECTIONS.find(s=>n>=s.from&&n<=s.to); return s?s.t:''; }
+function csvCell(v){ v=(v==null?'':String(v)); return /[",\n\r]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
+function csvRow(arr){ return arr.map(csvCell).join(','); }
+function slug(s){ return (s||'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+
+function buildCSV(){
+  const gc = gateCeiling(), ec = evidenceCeiling(), placed = Math.min(gc,ec);
+  const client = document.getElementById('client').value;
+  const L = [];
+  L.push(csvRow(['Nimble Gravity AI-SDLC Placement']));
+  L.push(csvRow(['Client', client]));
+  L.push(csvRow(['Date', todayISO()]));
+  L.push(csvRow(['Placed level', placed+' - '+LEVEL_NAMES[placed]]));
+  L.push(csvRow(['Gate ceiling', gc]));
+  L.push(csvRow(['Evidence ceiling', ec]));
+  L.push('');
+  L.push(csvRow(['#','Section','Dimension','Level','Gate','Question','Answer']));
+  for(const q of Q){
+    L.push(csvRow([q.n, sectionOf(q.n), q.dim, q.lvl, q.gate?'Y':'', q.t, answers[q.n]||'']));
+  }
+  L.push('');
+  L.push(csvRow(['Results']));
+  L.push(csvRow(['','Evidence %','','Dimension','Dim avg']));
+  for(let l=1;l<=5;l++){
+    const p = levelPct(l), dim = DIMS[l-1], da = dimAvg(dim);
+    L.push(csvRow(['Level '+l+': '+LEVEL_NAMES[l], Math.round(p*100)+'%', '', dim, da?da.toFixed(2):'']));
+  }
+  L.push('');
+  L.push(csvRow(['Diagnosis', diagnosis(placed,gc,ec).replace(/<[^>]*>/g,'')]));
+  return L.join('\r\n');
+}
+function exportCSV(){
+  const cl = slug(document.getElementById('client').value);
+  const name = 'ng-aisdlc-placement'+(cl?'_'+cl:'')+'_'+todayISO()+'.csv';
+  const blob = new Blob([buildCSV()], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── CSV import ───────────────────────────────────────────────────────────
+function parseCSV(text){
+  const rows = []; let row = [], cell = '', q = false;
+  for(let i=0;i<text.length;i++){
+    const c = text[i];
+    if(q){
+      if(c==='"'){ if(text[i+1]==='"'){ cell+='"'; i++; } else q=false; }
+      else cell += c;
+    } else {
+      if(c==='"') q = true;
+      else if(c===','){ row.push(cell); cell=''; }
+      else if(c==='\n'){ row.push(cell); rows.push(row); row=[]; cell=''; }
+      else if(c==='\r'){ /* ignore */ }
+      else cell += c;
+    }
+  }
+  row.push(cell); rows.push(row);
+  return rows;
+}
+function importCSV(text){
+  const rows = parseCSV(text);
+  const newAns = {};
+  let client = null;
+  for(const r of rows){
+    if(!r.length) continue;
+    const first = (r[0]||'').trim();
+    if(first.toLowerCase()==='client' && r.length>1) client = (r[1]||'').trim();
+    const n = parseInt(first,10);
+    if(!isNaN(n) && String(n)===first && n>=1 && n<=Q.length){
+      const ans = (r[r.length-1]||'').trim().toUpperCase();
+      newAns[n] = (ans==='Y'||ans==='N') ? ans : '';
+    }
+  }
+  if(client!==null) document.getElementById('client').value = client;
+  document.querySelectorAll('#qbody select').forEach(sel=>{
+    const n = +sel.closest('.ans').dataset.n;
+    sel.value = newAns[n] || '';
+    sel.dispatchEvent(new Event('change'));
+  });
+  saveState();
+}
+
+loadState();
 recompute();
 </script>
 </body></html>
