@@ -15,7 +15,9 @@ nav .lvl{font-variant-numeric:tabular-nums;color:var(--amber);font-weight:600;ma
 nav .orbit{display:block;margin-left:24px;font-size:11px;font-style:italic;letter-spacing:.3px;color:#8E7BB0}
 nav a.on .orbit{color:#B9A9D6}
 nav .grp{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#8E7BB0;margin:22px 0 6px}
-main{padding:56px 64px;max-width:900px}
+main{padding:56px 64px;max-width:900px;position:relative}
+.assess-cta{position:absolute;top:22px;right:26px;z-index:6;display:inline-flex;align-items:center;gap:6px;background:var(--amber);color:var(--navy);text-decoration:none;font:700 13px Archivo,system-ui,sans-serif;padding:9px 16px;border-radius:999px;box-shadow:0 3px 12px rgba(46,26,71,.22)}
+.assess-cta:hover{background:#B36F0C;color:#fff}
 .kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);font-weight:600}
 h1{font-family:Fraunces,serif;font-weight:600;font-size:42px;line-height:1.12;margin:10px 0 6px}
 h1 .std{color:var(--muted);font-size:22px;font-weight:400;font-style:italic}
@@ -47,6 +49,6 @@ td{border-bottom:1px solid var(--hair);padding:10px;vertical-align:top}
 .diagram-modal img{max-width:100%;max-height:88vh;object-fit:contain;border-radius:10px;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
 .modal-hint{color:rgba(255,255,255,0.45);font-size:13px;margin-top:14px}
 footer{color:var(--muted);font-size:12.5px;margin-top:60px}
-@media(max-width:860px){.layout{grid-template-columns:1fr}nav{position:static;height:auto}main{padding:32px 22px}.hero{margin:20px -22px}.expand-hint{display:none}}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav{position:static;height:auto}main{padding:32px 22px}.hero{margin:20px -22px}.expand-hint{display:none}.assess-cta{position:static;margin:0 0 16px}}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 @media(prefers-reduced-motion:no-preference){.orbit-dot{animation:pulse 3.5s ease-in-out infinite}@keyframes pulse{50%{opacity:.55}}}

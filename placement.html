@@ -1,8 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Placement instrument · NG AI-SDLC Maturity Model</title>
+<title>Assessment · NG AI-SDLC Maturity Model</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" defer></script>
 <style>
 /* ── Spreadsheet chrome ─────────────────────────────────────────── */
 .sheet-wrap{--grid:#D9D2E4;--head:#F0ECF7;--headtx:#5A4A72;--sel:#C97E12;
@@ -18,6 +19,7 @@ table.xl{border-collapse:collapse;width:100%;font-size:13.5px;table-layout:fixed
 table.xl col.c-row{width:38px}
 table.xl col.c-num{width:44px}
 table.xl col.c-ans{width:92px}
+table.xl col.c-exp{width:240px}
 table.xl thead th{position:sticky;top:0;z-index:3;background:var(--head);color:var(--headtx);
   font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:none;
   border:1px solid var(--grid);padding:5px 8px;text-align:center}
@@ -37,6 +39,10 @@ table.xl td.ans{padding:0;text-align:center}
 .ans.yes{background:#EAF6EC}.ans.yes select{color:#1F7A34}
 .ans.no{background:#FBECEC}.ans.no select{color:#B23B3B}
 .ans select:focus{outline:2px solid var(--sel);outline-offset:-2px}
+table.xl td.exp{padding:0}
+.exp input{width:100%;border:0;background:transparent;font:inherit;padding:7px 9px;color:var(--ink)}
+.exp input::placeholder{color:#B9AEC9;font-style:italic}
+.exp input:focus{outline:2px solid var(--sel);outline-offset:-2px;background:#FFFDF7}
 /* ── Sheet tabs ─────────────────────────────────────────────────── */
 .xl-tabs{display:flex;gap:0;background:var(--head);border-top:1px solid var(--grid)}
 .xl-tabs button{border:0;background:transparent;border-right:1px solid var(--grid);
@@ -55,16 +61,26 @@ table.xl td.resval{text-align:right;font-variant-numeric:tabular-nums;font-weigh
 .btn{border:1px solid var(--hair);background:#fff;border-radius:8px;padding:7px 14px;
   font:600 13px Archivo;color:var(--navy);cursor:pointer}
 .btn:hover{background:var(--ice)}
+.client-in{border:1px solid var(--hair);border-radius:8px;padding:7px 11px;font:600 13px Archivo;
+  color:var(--navy);min-width:220px}
+.client-in::placeholder{color:var(--muted);font-weight:400;font-style:italic}
+.toolrow .spacer{flex:1 1 auto}
 .hint{font-size:13px;color:var(--muted);font-style:italic;margin:10px 0 0}
 </style>
-</head><body><div class="layout"><nav><div class="brand">Nimble Gravity<span>.</span></div><div class="sub">AI-SDLC Maturity Model</div><a href="index.html" class="">Overview &amp; gates</a><div class="grp">Levels</div><a href="level-0.html" class=""><span class="lvl">0</span>No AI Use<span class="orbit">Grounded</span></a><a href="level-1.html" class=""><span class="lvl">1</span>Ad Hoc<span class="orbit">Opportunistic</span></a><a href="level-2.html" class=""><span class="lvl">2</span>Defined<span class="orbit">Repeatable</span></a><a href="level-3.html" class=""><span class="lvl">3</span>Managed Autonomy<span class="orbit">Bounded</span></a><a href="level-4.html" class=""><span class="lvl">4</span>Quantitatively Managed<span class="orbit">Instrumented</span></a><a href="level-5.html" class=""><span class="lvl">5</span>Optimizing<span class="orbit">Transformative</span></a><div class="grp">Field kit</div><a href="assessment.html" class="">Running the assessment</a><a href="placement.html" class="on">Placement instrument</a><a href="metrics.html" class="">Appendix: metrics catalog</a></nav><main>
+</head><body><div class="layout"><nav><div class="brand">Nimble Gravity<span>.</span></div><div class="sub">AI-SDLC Maturity Model</div><a href="index.html" class="">Overview &amp; gates</a><div class="grp">Levels</div><a href="level-0.html" class=""><span class="lvl">0</span>No AI Use<span class="orbit">Grounded</span></a><a href="level-1.html" class=""><span class="lvl">1</span>Ad Hoc<span class="orbit">Opportunistic</span></a><a href="level-2.html" class=""><span class="lvl">2</span>Defined<span class="orbit">Repeatable</span></a><a href="level-3.html" class=""><span class="lvl">3</span>Managed Autonomy<span class="orbit">Bounded</span></a><a href="level-4.html" class=""><span class="lvl">4</span>Quantitatively Managed<span class="orbit">Instrumented</span></a><a href="level-5.html" class=""><span class="lvl">5</span>Optimizing<span class="orbit">Transformative</span></a><div class="grp">Field kit</div><a href="assessment.html" class="">Running the assessment</a><a href="placement.html" class="on">Take the assessment</a><a href="metrics.html" class="">Appendix: metrics catalog</a></nav><main>
 <div class="kicker">Field kit · Interactive</div>
-<h1>Placement instrument</h1>
+<h1>AI-SDLC Assessment</h1>
 <p class="lede">Answer every question <strong>Y</strong> or <strong>N</strong> based on what the client can evidence today, not what is planned. If it is true for some teams but not standard, answer N. The <em>Placement</em> tab scores as you go — the same hidden map used in the workbook.</p>
 
 <div class="toolrow">
+  <input class="client-in" id="client" type="text" placeholder="Client / engagement (optional)" autocomplete="off">
   <button class="btn" id="allNo">Reset to N</button>
   <button class="btn" id="clearAll">Clear all</button>
+  <button class="btn" id="exportXlsx">Export XLSX</button>
+  <button class="btn" id="exportCsv">Export CSV</button>
+  <button class="btn" id="importCsv">Import CSV</button>
+  <input type="file" id="importFile" accept=".csv,text/csv" hidden>
+  <span class="spacer"></span>
   <span class="hint" id="progress"></span>
 </div>
 
@@ -73,9 +89,9 @@ table.xl td.resval{text-align:right;font-variant-numeric:tabular-nums;font-weigh
   <div class="xl-scroll">
     <!-- QUESTIONNAIRE SHEET -->
     <table class="xl" id="qsheet">
-      <colgroup><col class="c-row"><col class="c-num"><col><col class="c-ans"></colgroup>
-      <thead><tr><th class="corner"></th><th>A</th><th>B</th><th>C</th></tr>
-        <tr><th class="corner">1</th><th style="text-align:left" colspan="3">Nimble Gravity AI-SDLC Maturity Assessment</th></tr></thead>
+      <colgroup><col class="c-row"><col class="c-num"><col><col class="c-ans"><col class="c-exp"></colgroup>
+      <thead><tr><th class="corner"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+        <tr><th class="corner">1</th><th style="text-align:left" colspan="4">Nimble Gravity AI-SDLC Maturity Assessment</th></tr></thead>
       <tbody id="qbody"></tbody>
     </table>
     <!-- PLACEMENT SHEET -->
@@ -159,6 +175,7 @@ const Q = [
 const LEVEL_NAMES = ["No AI Use","Ad Hoc","Defined","Managed Autonomy","Quantitatively Managed","Optimizing"];
 const DIMS = ["People & Skills","Process & Workflow","Platform & Tooling","Governance & Risk","Measurement"];
 const answers = {}; // n -> "Y" | "N" | ""
+const explanations = {}; // n -> free-text rationale
 
 // ── Build the questionnaire sheet ────────────────────────────────────────
 const qbody = document.getElementById('qbody');
@@ -166,7 +183,7 @@ let xlRow = 1; // spreadsheet row counter (row 1 = title)
 function ssRow(){ return ++xlRow; }
 SECTIONS.forEach(sec=>{
   const brow = document.createElement('tr'); brow.className='band';
-  brow.innerHTML = `<td class="rownum">${ssRow()}</td><td colspan="3">${sec.t}</td>`;
+  brow.innerHTML = `<td class="rownum">${ssRow()}</td><td colspan="4">${sec.t}</td>`;
   qbody.appendChild(brow);
   for(let n=sec.from;n<=sec.to;n++){
     const q = Q[n-1];
@@ -178,10 +195,12 @@ SECTIONS.forEach(sec=>{
       `<td class="qtext">${q.t}</td>`+
       `<td class="ans" data-n="${n}"><select aria-label="Answer to question ${n}">`+
         `<option value="">—</option><option value="Y">Y</option><option value="N">N</option>`+
-      `</select></td>`;
+      `</select></td>`+
+      `<td class="exp" data-en="${n}"><input type="text" aria-label="Explanation for question ${n}" placeholder="Why? (optional)"></td>`;
     qbody.appendChild(tr);
     const cell = tr.querySelector('.ans');
     const sel = tr.querySelector('select');
+    const exp = tr.querySelector('.exp input');
     sel.addEventListener('change', ()=>{
       answers[n] = sel.value;
       cell.classList.toggle('yes', sel.value==='Y');
@@ -192,7 +211,13 @@ SECTIONS.forEach(sec=>{
       document.getElementById('cellref').textContent = 'C'+r;
       document.getElementById('fxview').textContent = q.t;
     });
+    exp.addEventListener('input', ()=>{ explanations[n] = exp.value; saveState(); });
+    exp.addEventListener('focus', ()=>{
+      document.getElementById('cellref').textContent = 'D'+r;
+      document.getElementById('fxview').textContent = q.t;
+    });
     answers[n]="";
+    explanations[n]="";
   }
 });
 
@@ -264,6 +289,7 @@ function recompute(){
     `<td class="placed-big">${LEVEL_NAMES[placed]}</td></tr>`);
   rows.push(`<tr><td class="rownum">${rn++}</td><td colspan="3" class="diag">${diagnosis(placed,gc,ec)}</td></tr>`);
   pbody.innerHTML = rows.join('');
+  saveState();
 }
 
 // ── Sheet tab switching ──────────────────────────────────────────────────
@@ -281,11 +307,290 @@ document.querySelectorAll('.xl-tabs button').forEach(b=>{
 
 // ── Toolbar ──────────────────────────────────────────────────────────────
 document.getElementById('allNo').addEventListener('click', ()=>setAll('N'));
-document.getElementById('clearAll').addEventListener('click', ()=>setAll(''));
+document.getElementById('clearAll').addEventListener('click', clearAllState);
+document.getElementById('exportXlsx').addEventListener('click', exportXLSX);
+document.getElementById('exportCsv').addEventListener('click', exportCSV);
+document.getElementById('importCsv').addEventListener('click', ()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const rd = new FileReader();
+  rd.onload = ()=>{ importCSV(String(rd.result)); };
+  rd.readAsText(f);
+  e.target.value = '';
+});
+document.getElementById('client').addEventListener('input', saveState);
+
 function setAll(v){
   document.querySelectorAll('#qbody select').forEach(sel=>{ sel.value=v; sel.dispatchEvent(new Event('change')); });
 }
+function clearAllState(){
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  document.getElementById('client').value = '';
+  document.querySelectorAll('#qbody .exp input').forEach(inp=>{ inp.value=''; });
+  for(const k in explanations) explanations[k]='';
+  setAll('');
+}
 
+// ── Persistence (localStorage autosave/restore) ──────────────────────────
+const LS_KEY = 'ng-aisdlc-placement';
+function saveState(){
+  try{
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      client: document.getElementById('client').value,
+      date: todayISO(),
+      answers,
+      explanations
+    }));
+  }catch(e){}
+}
+function loadState(){
+  let data = null;
+  try{ data = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); }catch(e){}
+  if(!data) return;
+  if(typeof data.client === 'string') document.getElementById('client').value = data.client;
+  if(data.explanations){
+    document.querySelectorAll('#qbody .exp input').forEach(inp=>{
+      const n = +inp.closest('.exp').dataset.en;
+      const v = data.explanations[n];
+      inp.value = (typeof v==='string') ? v : '';
+      explanations[n] = inp.value;
+    });
+  }
+  if(data.answers){
+    document.querySelectorAll('#qbody select').forEach(sel=>{
+      const n = +sel.closest('.ans').dataset.n;
+      const v = data.answers[n];
+      sel.value = (v==='Y'||v==='N') ? v : '';
+      sel.dispatchEvent(new Event('change'));
+    });
+  }
+}
+
+// ── CSV helpers ──────────────────────────────────────────────────────────
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function sectionOf(n){ const s = SECTIONS.find(s=>n>=s.from&&n<=s.to); return s?s.t:''; }
+function csvCell(v){ v=(v==null?'':String(v)); return /[",\n\r]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
+function csvRow(arr){ return arr.map(csvCell).join(','); }
+function slug(s){ return (s||'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+
+function buildCSV(){
+  const gc = gateCeiling(), ec = evidenceCeiling(), placed = Math.min(gc,ec);
+  const client = document.getElementById('client').value;
+  const L = [];
+  L.push(csvRow(['Nimble Gravity AI-SDLC Assessment']));
+  L.push(csvRow(['Client', client]));
+  L.push(csvRow(['Date', todayISO()]));
+  L.push(csvRow(['Placed level', placed+' - '+LEVEL_NAMES[placed]]));
+  L.push(csvRow(['Gate ceiling', gc]));
+  L.push(csvRow(['Evidence ceiling', ec]));
+  L.push('');
+  L.push(csvRow(['#','Section','Dimension','Level','Gate','Question','Answer','Explanation']));
+  for(const q of Q){
+    L.push(csvRow([q.n, sectionOf(q.n), q.dim, q.lvl, q.gate?'Y':'', q.t, answers[q.n]||'', explanations[q.n]||'']));
+  }
+  L.push('');
+  L.push(csvRow(['Results']));
+  L.push(csvRow(['','Evidence %','','Dimension','Dim avg']));
+  for(let l=1;l<=5;l++){
+    const p = levelPct(l), dim = DIMS[l-1], da = dimAvg(dim);
+    L.push(csvRow(['Level '+l+': '+LEVEL_NAMES[l], Math.round(p*100)+'%', '', dim, da?da.toFixed(2):'']));
+  }
+  L.push('');
+  L.push(csvRow(['Diagnosis', diagnosis(placed,gc,ec).replace(/<[^>]*>/g,'')]));
+  return L.join('\r\n');
+}
+function exportCSV(){
+  const cl = slug(document.getElementById('client').value);
+  const name = 'ng-aisdlc-assessment'+(cl?'_'+cl:'')+'_'+todayISO()+'.csv';
+  const blob = new Blob([buildCSV()], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── XLSX export (styled, entirely client-side via ExcelJS) ──────────────
+async function exportXLSX(){
+  if(typeof ExcelJS==='undefined'){ alert('The spreadsheet library is still loading — please try again in a moment.'); return; }
+  const NAVY='FF2E1A47', AMBER='FFC97E12', CREAM='FFFFF2CC', LILAC='FFEFEAF9',
+        MUTED='FF6E6280', GRID='FFD9D2C4', WHITE='FFFFFFFF',
+        YESBG='FFEAF6EC', YESTX='FF1F7A34', NOBG='FFFBECEC', NOTX='FFB23B3B';
+  const thin={style:'thin',color:{argb:GRID}};
+  const border={top:thin,left:thin,bottom:thin,right:thin};
+  const gc=gateCeiling(), ec=evidenceCeiling(), placed=Math.min(gc,ec);
+  const client=document.getElementById('client').value.trim();
+
+  const wb=new ExcelJS.Workbook();
+  wb.creator='Nimble Gravity'; wb.created=new Date();
+
+  // ─ Questionnaire sheet ─
+  const qs=wb.addWorksheet('Questionnaire',{views:[{state:'frozen',ySplit:4}]});
+  qs.columns=[{width:5},{width:72},{width:8},{width:6},{width:11},{width:52}];
+  qs.mergeCells('A1:F1');
+  const t=qs.getCell('A1');
+  t.value='Nimble Gravity · AI-SDLC Maturity Assessment';
+  t.font={name:'Archivo',size:16,bold:true,color:{argb:WHITE}};
+  t.fill={type:'pattern',pattern:'solid',fgColor:{argb:NAVY}};
+  t.alignment={vertical:'middle',horizontal:'left',indent:1};
+  qs.getRow(1).height=30;
+  qs.mergeCells('A2:F2');
+  const meta=qs.getCell('A2');
+  meta.value=`Client: ${client||'—'}    ·    Date: ${todayISO()}    ·    Placed level: ${placed} — ${LEVEL_NAMES[placed]}`;
+  meta.font={name:'Archivo',size:10,color:{argb:MUTED}};
+  meta.fill={type:'pattern',pattern:'solid',fgColor:{argb:LILAC}};
+  meta.alignment={vertical:'middle',horizontal:'left',indent:1};
+  qs.getRow(2).height=20;
+  qs.addRow([]);
+  const hdr=qs.addRow(['#','Question','Level','Gate','Answer','Explanation']);
+  hdr.height=20;
+  hdr.eachCell(c=>{
+    c.font={name:'Archivo',size:11,bold:true,color:{argb:WHITE}};
+    c.fill={type:'pattern',pattern:'solid',fgColor:{argb:AMBER}};
+    c.alignment={vertical:'middle',horizontal:'center'};
+    c.border=border;
+  });
+  hdr.getCell(2).alignment={vertical:'middle',horizontal:'left',indent:1};
+  hdr.getCell(6).alignment={vertical:'middle',horizontal:'left',indent:1};
+  SECTIONS.forEach(sec=>{
+    const br=qs.addRow([sec.t]);
+    qs.mergeCells(`A${br.number}:F${br.number}`);
+    const bc=br.getCell(1);
+    bc.value=sec.t;
+    bc.font={name:'Archivo',size:10,bold:true,color:{argb:NAVY}};
+    bc.fill={type:'pattern',pattern:'solid',fgColor:{argb:CREAM}};
+    bc.alignment={vertical:'middle',horizontal:'left',indent:1};
+    br.height=18;
+    for(let n=sec.from;n<=sec.to;n++){
+      const q=Q[n-1], a=answers[n]||'';
+      const row=qs.addRow([n,q.t,q.lvl,q.gate?'Yes':'',a,explanations[n]||'']);
+      row.eachCell({includeEmpty:true},c=>{ c.border=border; });
+      row.getCell(1).alignment={vertical:'top',horizontal:'center'};
+      row.getCell(2).alignment={vertical:'top',horizontal:'left',wrapText:true};
+      row.getCell(2).font={color:{argb:NAVY}};
+      row.getCell(3).alignment={vertical:'top',horizontal:'center'};
+      row.getCell(4).alignment={vertical:'top',horizontal:'center'};
+      row.getCell(4).font={bold:true,color:{argb:AMBER}};
+      const ac=row.getCell(5);
+      ac.alignment={vertical:'top',horizontal:'center'};
+      if(a==='Y'){ ac.fill={type:'pattern',pattern:'solid',fgColor:{argb:YESBG}}; ac.font={bold:true,color:{argb:YESTX}}; }
+      else if(a==='N'){ ac.fill={type:'pattern',pattern:'solid',fgColor:{argb:NOBG}}; ac.font={bold:true,color:{argb:NOTX}}; }
+      else { ac.font={color:{argb:MUTED}}; }
+      row.getCell(6).alignment={vertical:'top',horizontal:'left',wrapText:true};
+    }
+  });
+
+  // ─ Placement sheet ─
+  const ps=wb.addWorksheet('Placement');
+  ps.columns=[{width:34},{width:16},{width:44}];
+  ps.mergeCells('A1:C1');
+  const pt=ps.getCell('A1');
+  pt.value='Placement';
+  pt.font={name:'Archivo',size:16,bold:true,color:{argb:WHITE}};
+  pt.fill={type:'pattern',pattern:'solid',fgColor:{argb:NAVY}};
+  pt.alignment={vertical:'middle',horizontal:'left',indent:1};
+  ps.getRow(1).height=28;
+  ps.addRow([]);
+  const ph=ps.addRow(['Level','Evidence %','60% rule']);
+  ph.eachCell(c=>{ c.font={bold:true,color:{argb:WHITE}}; c.fill={type:'pattern',pattern:'solid',fgColor:{argb:AMBER}}; c.border=border; c.alignment={horizontal:'center'}; });
+  ph.getCell(1).alignment={horizontal:'left',indent:1};
+  for(let L=1;L<=5;L++){
+    const p=levelPct(L), pass=p>=0.6;
+    const r=ps.addRow([`Level ${L}: ${LEVEL_NAMES[L]}`, Math.round(p*100)+'%', pass?'PASS':'—']);
+    r.eachCell(c=>{ c.border=border; });
+    r.getCell(2).alignment={horizontal:'center'};
+    r.getCell(3).alignment={horizontal:'center'};
+    r.getCell(3).font={bold:true,color:{argb:pass?YESTX:MUTED}};
+  }
+  ps.addRow([]);
+  const g1=ps.addRow(['Gate ceiling', gc]); g1.getCell(1).font={bold:true,color:{argb:NAVY}}; g1.getCell(2).alignment={horizontal:'center'};
+  const g2=ps.addRow(['Evidence ceiling (60% rule)', ec]); g2.getCell(1).font={bold:true,color:{argb:NAVY}}; g2.getCell(2).alignment={horizontal:'center'};
+  const g3=ps.addRow(['PLACED LEVEL', `${placed} — ${LEVEL_NAMES[placed]}`]);
+  g3.getCell(1).font={bold:true,color:{argb:NAVY}};
+  g3.getCell(2).font={name:'Fraunces',bold:true,size:14,color:{argb:NAVY}};
+  g3.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:CREAM}};
+  g3.getCell(2).fill={type:'pattern',pattern:'solid',fgColor:{argb:CREAM}};
+  g3.height=22;
+  ps.addRow([]);
+  const dh=ps.addRow(['Dimension','Avg level of Y answers','']);
+  ps.mergeCells(`B${dh.number}:C${dh.number}`);
+  dh.getCell(1).font={bold:true,color:{argb:WHITE}}; dh.getCell(2).font={bold:true,color:{argb:WHITE}};
+  dh.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:AMBER}};
+  dh.getCell(2).fill={type:'pattern',pattern:'solid',fgColor:{argb:AMBER}};
+  dh.getCell(1).border=border; dh.getCell(2).border=border;
+  DIMS.forEach(dim=>{
+    const da=dimAvg(dim);
+    const r=ps.addRow([dim, da?da.toFixed(2):'—','']);
+    ps.mergeCells(`B${r.number}:C${r.number}`);
+    r.getCell(1).border=border; r.getCell(2).border=border;
+    r.getCell(2).alignment={horizontal:'center'};
+  });
+  ps.addRow([]);
+  const dg=ps.addRow(['Diagnosis', diagnosis(placed,gc,ec).replace(/<[^>]*>/g,'')]);
+  ps.mergeCells(`B${dg.number}:C${dg.number}`);
+  dg.getCell(1).font={bold:true,color:{argb:NAVY}};
+  dg.getCell(2).alignment={horizontal:'left',vertical:'top',wrapText:true};
+  dg.height=54;
+
+  const buf=await wb.xlsx.writeBuffer();
+  const cl=slug(client);
+  const name='ng-aisdlc-assessment'+(cl?'_'+cl:'')+'_'+todayISO()+'.xlsx';
+  const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=name;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── CSV import ───────────────────────────────────────────────────────────
+function parseCSV(text){
+  const rows = []; let row = [], cell = '', q = false;
+  for(let i=0;i<text.length;i++){
+    const c = text[i];
+    if(q){
+      if(c==='"'){ if(text[i+1]==='"'){ cell+='"'; i++; } else q=false; }
+      else cell += c;
+    } else {
+      if(c==='"') q = true;
+      else if(c===','){ row.push(cell); cell=''; }
+      else if(c==='\n'){ row.push(cell); rows.push(row); row=[]; cell=''; }
+      else if(c==='\r'){ /* ignore */ }
+      else cell += c;
+    }
+  }
+  row.push(cell); rows.push(row);
+  return rows;
+}
+function importCSV(text){
+  const rows = parseCSV(text);
+  const newAns = {}, newExp = {};
+  let client = null;
+  for(const r of rows){
+    if(!r.length) continue;
+    const first = (r[0]||'').trim();
+    if(first.toLowerCase()==='client' && r.length>1) client = (r[1]||'').trim();
+    const n = parseInt(first,10);
+    if(!isNaN(n) && String(n)===first && n>=1 && n<=Q.length){
+      const ans = String(r[6] != null ? r[6] : (r[r.length-1]||'')).trim().toUpperCase();
+      newAns[n] = (ans==='Y'||ans==='N') ? ans : '';
+      newExp[n] = (r[7]||'').trim();
+    }
+  }
+  if(client!==null) document.getElementById('client').value = client;
+  document.querySelectorAll('#qbody .exp input').forEach(inp=>{
+    const n = +inp.closest('.exp').dataset.en;
+    inp.value = newExp[n] || '';
+    explanations[n] = inp.value;
+  });
+  document.querySelectorAll('#qbody select').forEach(sel=>{
+    const n = +sel.closest('.ans').dataset.n;
+    sel.value = newAns[n] || '';
+    sel.dispatchEvent(new Event('change'));
+  });
+  saveState();
+}
+
+loadState();
 recompute();
 </script>
 </body></html>
